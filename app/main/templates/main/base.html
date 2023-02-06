@@ -7,14 +7,37 @@
         width: 100%;
         padding-top: 10px;
       }
+      table {
+        text-align: center;
+        justify-content: center;
+        width: 100%;
+        padding-top: 10px;
+      }
     </style>
   </head>
   <body>
-    <form>
+    <form method="post">
+      {% csrf_token %}
       <input type="text" name="inputText">
       <button type="submit">Submit</button>
     </form>
+    {% if result %}
+    <table>
+      <thead>
+        <tr>
+          <th>Destination Lane</th>
+          <th>Percentage</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in result %}
+        <tr>
+          <td>{{ item.destination_lane }}</td>
+          <td>{{ item.percentage }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
   </body>
 </html>
-
-
